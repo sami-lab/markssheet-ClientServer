@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import axios from "axios"
 
 export default function Form() {
-    const baseUrl = "http://localhost:5000"
-
+   
     //Local States 
     let [arr, setArr] = useState([]);
     let [subjects, setSubjects] = useState([]);
@@ -11,7 +10,7 @@ export default function Form() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await axios.post(`${baseUrl}/api/calculate`, subjects)
+        await axios.post(`/api/calculate`, subjects)
             .then((res) => {
                 setResponse(res.data.data.doc)
                 alert(res.data.status)
@@ -40,6 +39,7 @@ export default function Form() {
                             <input placeholder="Enter your name" type="email" className="form-control text-capitalize" aria-describedby="emailHelp" />
                         </div>
                         <div className="form-group">
+                        <label htmlFor="inlineFormCustomSelect" className="font-weight-bold text-uppercase">Number of Subjects:</label>
                             <select placeholder="Total Subject" className="custom-select mr-sm-2" id="inlineFormCustomSelect" onChange={(e) => {
                                 const val = e.target.value;
                                 let arrLength = (Array.from(Array(parseInt(val)).keys()))
